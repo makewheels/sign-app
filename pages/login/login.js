@@ -15,12 +15,27 @@ mui.plusReady(function() {
 	});
 });
 
-//登录完成
+//本地登录完成
 function loginFinish(auth) {
-	console.log(JSON.stringify(auth));
+	//如果登录失败
+	if (auth.authResult == null) {
+		mui.toast("登录失败");
+	} else {
+		//调用服务器
+		mui.post(baseurl + '/user?method=login&type=qq', {
+			auth: JSON.stringify(auth),
+			deviceJson: deviceJson
+		}, function(data) {
+			console.log('login success');
+			plus.storage.setItem("loginToken", data.loginToken);
+			//前往主页
+			plus.webview.open('pages/tabs/main/main.html', 'main');
+			plus.webview.currentWebview().close();
+		}, 'json');
+	}
 }
 
-// 登录，id为字符串：qq,weixin,weibo 
+// 登录，id为字符串：qq,weixin,weibo
 function login(id) {
 	var auth = auths[id];
 	if (auth) {
