@@ -1,7 +1,28 @@
+//当前打开的webview id
+var currentWebviewId;
+//初始化判断，只调用一次
 mui.plusReady(function() {
-	//当前打开的webview id
-	var currentWebviewId;
-	//判断需要先打开哪个页面
+	//判断首页需要先打开哪个页面
+	mui.get(baseurl + '/mission?method=getCurrent', {
+	}, function(data) {
+		var currentMissionId = data.currentMissionId;
+		//如果该用户没有当前任务
+		if (currentMissionId == null || currentMissionId == undefined) {
+			//跳转至新建任务页面
+			plus.webview.open('/pages/mission/noMission.html', 'noMission');
+			//隐藏main页面
+			plus.webview.currentWebview().hide();
+		} else {
+			//如果有当前任务，正常加载main页面
+			loadMainPage();
+		}
+	}, 'json');
+});
+
+//加载main页面
+function loadMainPage() {
+	//如果已经有当前任务
+	//跳转至签到页面
 	currentWebviewId = "sign";
 	//打开首页
 	openWebviewById(currentWebviewId);
@@ -27,7 +48,7 @@ mui.plusReady(function() {
 		//重设当前页id
 		currentWebviewId = id;
 	});
-});
+}
 
 function openWebviewById(id) {
 	var url;
