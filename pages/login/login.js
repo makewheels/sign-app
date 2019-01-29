@@ -26,10 +26,9 @@ function loginFinish(auth) {
 			auth: JSON.stringify(auth),
 			deviceJson: deviceJson
 		}, function(data) {
-			console.log('login success');
 			plus.storage.setItem("loginToken", data.loginToken);
 			//前往主页
-			plus.webview.open('pages/tabs/main/main.html', 'main');
+			plus.webview.open('/pages/tabs/main/main.html', 'main');
 			plus.webview.currentWebview().close();
 		}, 'json');
 	}

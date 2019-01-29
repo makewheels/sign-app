@@ -11,7 +11,9 @@ function request(url, data, successFunction) {
 		},
 		error: function(xhr, type, errorThrown) {
 			if (xhr.status == 401) {
-				plus.webview.open("pages/login/login.html");
+				plus.webview.open("/pages/login/login.html");
+				plus.webview.currentWebview().close();
+				plus.webview.getWebviewById('main').close();
 			}
 		}
 	});

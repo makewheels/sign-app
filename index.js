@@ -23,12 +23,12 @@ mui.plusReady(function() {
 			type: 'post',
 			success: function(data) {
 				plus.storage.setItem("loginToken", data.loginToken);
-				plus.webview.open('pages/tabs/main/main.html', 'main');
+				plus.webview.open('/pages/tabs/main/main.html', 'main');
 				plus.webview.currentWebview().close();
 			},
 			error: function(xhr, type, errorThrown) {
 				if (xhr.status == 401) {
-					plus.webview.open("pages/login/login.html");
+					plus.webview.open("/pages/login/login.html");
 					plus.webview.currentWebview().close();
 				}
 			}
