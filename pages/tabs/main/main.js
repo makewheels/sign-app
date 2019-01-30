@@ -3,8 +3,7 @@ var currentWebviewId;
 //初始化判断，只调用一次
 mui.plusReady(function() {
 	//判断首页需要先打开哪个页面
-	mui.get(baseurl + '/mission?method=getCurrent', {
-	}, function(data) {
+	mui.get(baseurl + '/mission?method=getCurrent', {}, function(data) {
 		var currentMissionId = data.currentMissionId;
 		//如果该用户没有当前任务
 		if (currentMissionId == null || currentMissionId == undefined) {

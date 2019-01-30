@@ -13,7 +13,7 @@ mui.plusReady(function() {
 				mui.get(baseurl + '/mission?method=join', {
 					missionUuid: missionUuid
 				}, function(data) {
-					if (data.state == "ok") {
+					if (data.status == "ok") {
 						mui.toast("成功加入：" + data.missionName + "！");
 						plus.webview.getWebviewById('main').show();
 						plus.webview.getWebviewById('main').reload();

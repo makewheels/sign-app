@@ -51,7 +51,7 @@ mui.plusReady(function() {
 			endHour: endHour,
 			endMinute: endMinute
 		}, function(data) {
-			if (data.state = "ok") {
+			if (data.status = "ok") {
 				mui.toast(missionName + " 保存成功！");
 				plus.webview.getWebviewById('main').show();
 				plus.webview.getWebviewById('main').reload();
