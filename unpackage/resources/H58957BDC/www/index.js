@@ -1,35 +1,10 @@
 mui.plusReady(function() {
-	plus.geolocation.getCurrentPosition(function(position) {
-		console.log(position.addresses);
-		mui.alert(position.addresses);
-	});
-
 	var loginToken = plus.storage.getItem("loginToken");
 	//上报打开应用日志
 	mui.post(baseurl + '/app?method=report&type=appOpen', {
 		deviceJson: deviceJson,
 		loginToken: loginToken
 	}, function(data) {}, 'json');
-	//检查更新
-	plus.runtime.getProperty(plus.runtime.appid, function(info) {
-		mui.post(baseurl + '/app?method=checkUpdate', {
-			version: info.version
-		}, function(data) {
-			//如果需要更新
-			if (data.needUpdate) {
-				//下载安装包
-				plus.downloader.createDownload(data.url, {}, function(download, status) {
-					//安装应用
-					plus.runtime.install(download.filename, {}, function(wInfo) {
-						//删除安装包
-						plus.io.resolveLocalFileSystemURL(download.filename, function(entry) {
-							entry.remove();
-						});
-					});
-				});
-			}
-		}, 'json');
-	});
 	//验证登录状态
 	//如果没有loginToken
 	if (loginToken == null || loginToken == "") {
