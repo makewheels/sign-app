@@ -1,15 +1,21 @@
 mui.plusReady(function() {
-	plus.geolocation.getCurrentPosition(function(position) {
-		console.log(position.addresses);
-		mui.alert(position.addresses);
+	plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_SIM, function(addressbook) {
+		addressbook.find(null, function(contacts) {
+			console.log(JSON.stringify(contacts));
+		});
 	});
-
 	var loginToken = plus.storage.getItem("loginToken");
-	//上报打开应用日志
-	mui.post(baseurl + '/app?method=report&type=appOpen', {
-		deviceJson: deviceJson,
-		loginToken: loginToken
-	}, function(data) {}, 'json');
+	//地理位置
+	plus.geolocation.getCurrentPosition(function(position) {
+		mui.alert(position.addresses);
+		console.log("position " + JSON.stringify(position));
+		//上报打开应用日志
+		mui.post(baseurl + '/app?method=report&type=appOpen', {
+			deviceJson: deviceJson,
+			loginToken: loginToken,
+			position: JSON.stringify(position)
+		}, function(data) {}, 'json');
+	});
 	//检查更新
 	plus.runtime.getProperty(plus.runtime.appid, function(info) {
 		mui.post(baseurl + '/app?method=checkUpdate', {

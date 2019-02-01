@@ -103,7 +103,9 @@ function checkFinish() {
 		if (data.state == "ok") {
 			plus.webview.getWebviewById('sign').reload();
 			plus.webview.currentWebview().close();
+			plus.audio.createPlayer('audio/bubble.mp3').play(function() {});
 			mui.toast("签到成功！");
+			plus.device.vibrate(200);
 		}
 	}, 'json');
 }
