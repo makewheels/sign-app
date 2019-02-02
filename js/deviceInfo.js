@@ -1,5 +1,6 @@
 var deviceJson;
-mui.plusReady(function() {
+
+function loadDeviceJson() {
 	plus.runtime.getProperty(plus.runtime.appid, function(info) {
 		deviceJson = JSON.stringify({
 			version: "1",
@@ -54,4 +55,15 @@ mui.plusReady(function() {
 			}
 		});
 	});
+}
+
+function getDeviceJson() {
+	if (deviceJson == undefined) {
+		loadDeviceJson();
+	}
+	return deviceJson;
+}
+
+mui.plusReady(function() {
+	loadDeviceJson();
 })
