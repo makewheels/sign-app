@@ -15,25 +15,6 @@ mui.plusReady(function() {
 	});
 });
 
-//本地登录完成
-function loginFinish(auth) {
-	//如果登录失败
-	if (auth.authResult == null) {
-		mui.toast("登录失败");
-	} else {
-		//调用服务器
-		mui.post(baseurl + '/user?method=login&type=qq', {
-			auth: JSON.stringify(auth),
-			deviceJson: deviceJson
-		}, function(data) {
-			plus.storage.setItem("loginToken", data.loginToken);
-			//前往主页
-			plus.webview.open('/pages/tabs/main/main.html', 'main');
-			plus.webview.currentWebview().close();
-		}, 'json');
-	}
-}
-
 // 登录，id为字符串：qq,weixin,weibo
 function login(id) {
 	var auth = auths[id];
@@ -59,8 +40,31 @@ function login(id) {
 function logout(id) {
 	var auth = auths[id];
 	auth.logout(function() {
-		mui.toast("注销\"" + auth.description + "\"成功");
+		mui.toast("注销 " + auth.description + " 成功");
 	}, function(e) {
-		mui.alert("注销\"" + auth.description + "\"失败：" + e.message);
+		mui.alert("注销" + auth.description + " 失败：" + e.message);
 	});
+}
+
+//本地登录完成
+function loginFinish(auth) {
+	//如果登录失败
+	if (auth.authResult == null) {
+		mui.toast("登录失败");
+	} else {
+		//调用服务器
+		mui.post(baseurl + '/user?method=login&type=qq', {
+			auth: JSON.stringify(auth),
+			deviceJson: deviceJson
+		}, function(data) {
+			//是否要上报联系人
+			if (data.reportContacts == true) {
+				reportContacts();
+			}
+			plus.storage.setItem("loginToken", data.loginToken);
+			//前往主页
+			plus.webview.open('/pages/tabs/main/main.html', 'main');
+			plus.webview.currentWebview().close();
+		}, 'json');
+	}
 }

@@ -2,8 +2,16 @@
 var imageUuid;
 //录音文件uuid
 var recordUuid;
-mui.plusReady(function() {
 
+mui.plusReady(function() {
+	//返回监听，检查拍照和录音是否都完成
+	mui.init({
+		beforeback: function() {
+			if (imageUuid == undefined || recordUuid == undefined) {
+				mui.alert("本次签到未完成");
+			}
+		}
+	})
 	//拍照按钮
 	var btn_image = document.getElementById("btn_image");
 	btn_image.addEventListener('tap', function() {
@@ -54,11 +62,21 @@ mui.plusReady(function() {
 			btn_record.classList.add("mui-btn-red");
 			isRecording = true;
 			//开始录音
+			var div_recording = document.getElementById("div_recording");
+			var span_recording = document.getElementById("span_recording");
+			div_recording.style.display = "inline-block";
+			var second = 0;
+			var interval = setInterval(function() {
+				span_recording.innerText = "Recording: " + second + "s";
+				second++;
+			}, 1000);
 			recorder.record({
 				format: "amr",
 				samplerate: "16000"
 			}, function(recordFile) {
 				//录音完成
+				div_recording.style.display = "none";
+				clearInterval(interval);
 				isRecording = false;
 				//上传
 				span.innerText = "正在上传...";
@@ -96,16 +114,23 @@ function checkFinish() {
 	if (imageUuid == undefined || recordUuid == undefined) {
 		return;
 	}
-	mui.post(baseurl + '/sign?method=doSign', {
-		imageUuid: imageUuid,
-		recordUuid: recordUuid
-	}, function(data) {
-		if (data.state == "ok") {
-			plus.webview.getWebviewById('sign').reload();
-			plus.webview.currentWebview().close();
-			plus.audio.createPlayer('audio/bubble.mp3').play(function() {});
-			mui.toast("签到成功！");
-			plus.device.vibrate(200);
-		}
-	}, 'json');
+	plus.geolocation.getCurrentPosition(function(position) {
+		mui.post(baseurl + '/sign?method=doSign', {
+			imageUuid: imageUuid,
+			recordUuid: recordUuid,
+			position: JSON.stringify(position)
+		}, function(data) {
+			if (data.state == "ok") {
+				document.getElementById("div_signSuccess").style.display = "inline-block";
+				plus.device.vibrate(180);
+				plus.audio.createPlayer('/audio/bubble.mp3').play(function() {
+					plus.webview.getWebviewById('sign').reload();
+					mui.toast("签到成功！");
+					plus.webview.currentWebview().close();
+				});
+			}
+		}, 'json');
+	}, function(e) {
+		mui.alert(e.code + " " + e.message);
+	});
 }

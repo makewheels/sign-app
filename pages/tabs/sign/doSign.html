@@ -6,13 +6,18 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
-		<script type="text/javascript" charset="utf-8">
+		<script type="text/javascript">
 			mui.init();
 		</script>
 		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="doSign.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
+		<style type="text/css">
+			* {
+				touch-action: none;
+			}
+		</style>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">签到页</h1>
@@ -29,6 +34,12 @@
 					<label style="width: 100px;"><b>录段音</b></label>
 					<span id="span_record" style="line-height: 40px;">点击录音--&gt;</span>
 					<button style="margin-right: 10px;width: 100px;" id='btn_record' type="button" class="mui-btn mui-btn-blue mui-btn-outlined">开始录音</button>
+				</div>
+				<div id="div_recording" style="display: none; height: 50px;margin-top: 30px;">
+					<span id="span_recording" style="font-size: 30px;color: red;"></span>
+				</div>
+				<div id="div_signSuccess" style="display: none; height: 50px;margin-top: 30px;">
+					<span style="font-size: 30px;color: green;">签到成功！</span>
 				</div>
 			</form>
 		</div>
