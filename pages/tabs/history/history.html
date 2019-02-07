@@ -10,8 +10,67 @@
 			mui.init();
 		</script>
 		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="history.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.mui-control-content {
+				background-color: white;
+				min-height: 170px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 70px;
+			}
+		</style>
 	</head>
 	<body>
-		history.html
+		<div style="background-color: lightgoldenrodyellow;" class="mui-input-row mui-checkbox mui-left">
+			<label>只看有效签到</label>
+			<input name="checkbox1" value="Item 1" type="checkbox" />
+		</div>
+		<div id="slider" class="mui-slider">
+			<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item mui-active" href="#item1">
+					所有
+				</a>
+				<a class="mui-control-item" href="#item2">
+					我的
+				</a>
+				<a class="mui-control-item" href="#item3">
+					其他人
+				</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<div class="mui-slider-group">
+				<div id="item1" class="mui-slider-item mui-control-content mui-active">
+					<div class="mui-scroll-wrapper">
+						<div id="scroll1" class="mui-scroll">
+							<div class="mui-loading">
+								<div class="mui-spinner">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="item2" class="mui-slider-item mui-control-content">
+					<div class="mui-scroll-wrapper">
+						<div id="scroll2" class="mui-scroll">
+							<div class="mui-loading">
+								<div class="mui-spinner">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="item3" class="mui-slider-item mui-control-content">
+					<div class="mui-scroll-wrapper">
+						<div id="scroll3" class="mui-scroll">
+							<div class="mui-loading">
+								<div class="mui-spinner">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
