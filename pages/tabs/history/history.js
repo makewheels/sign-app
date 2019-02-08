@@ -9,6 +9,11 @@ mui.plusReady(function() {
 			loadItem3();
 		}
 	});
+	(function($) {
+		$('.mui-scroll-wrapper').scroll({
+			indicators: true
+		});
+	})(mui);
 });
 
 function loadItem1() {
@@ -16,14 +21,15 @@ function loadItem1() {
 		who: "all",
 		valid: "all"
 	}, function(data) {
-		var html = "";
+		var html = '<ul class="mui-table-view">';
 		for (var i = 0; i < data.length; i++) {
 			var each = data[i];
 			html +=
-				'<ul class="mui-table-view"><li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
+				'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
 				each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
-				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li></ul>';
+				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
 		}
+		html += '</ul>';
 		document.getElementById("scroll1").innerHTML = html;
 	}, 'json');
 }
@@ -33,14 +39,15 @@ function loadItem2() {
 		who: "my",
 		valid: "all"
 	}, function(data) {
-		var html = "";
+		var html = '<ul class="mui-table-view">';
 		for (var i = 0; i < data.length; i++) {
 			var each = data[i];
 			html +=
-				'<ul class="mui-table-view"><li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
+				'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
 				each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
-				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li></ul>';
+				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
 		}
+		html += '</ul>';
 		document.getElementById("scroll2").innerHTML = html;
 	}, 'json');
 }
