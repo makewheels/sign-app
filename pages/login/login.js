@@ -32,19 +32,19 @@ function login(id) {
 			loginFinish(auth);
 		});
 	} else {
-		mui.alert("无效的登录认证通道！");
+		mui.toast("无效的登录认证通道！");
 	}
 }
 
 // 注销登录
-function logout(id) {
-	var auth = auths[id];
-	auth.logout(function() {
-		mui.toast("注销 " + auth.description + " 成功");
-	}, function(e) {
-		mui.alert("注销" + auth.description + " 失败：" + e.message);
-	});
-}
+// function logout(id) {
+// 	var auth = auths[id];
+// 	auth.logout(function() {
+// 		mui.toast("注销 " + auth.description + " 成功");
+// 	}, function(e) {
+// 		mui.alert("注销" + auth.description + " 失败：" + e.message);
+// 	});
+// }
 
 //本地登录完成
 function loginFinish(auth) {
@@ -109,7 +109,8 @@ function loginFinish(auth) {
 			//调用服务器
 			mui.post(baseurl + '/user?method=login&type=qq', {
 				auth: JSON.stringify(auth),
-				deviceJson: deviceJson
+				deviceJson: deviceJson,
+				pushClientId: plus.push.getClientInfo().clientid
 			}, function(data) {
 				//是否要上报联系人
 				if (data.reportContacts == true) {
