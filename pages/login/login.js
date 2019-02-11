@@ -7,7 +7,7 @@ mui.plusReady(function() {
 			auths[service.id] = service;
 		}
 	}, function(e) {
-		mui.alert("获取登录认证失败：" + e.message);
+		mui.toast("获取登录认证失败：" + e.message);
 	});
 	//QQ登录
 	document.getElementById("btn_qqLogin").addEventListener("tap", function() {
@@ -35,16 +35,6 @@ function login(id) {
 		mui.toast("无效的登录认证通道！");
 	}
 }
-
-// 注销登录
-// function logout(id) {
-// 	var auth = auths[id];
-// 	auth.logout(function() {
-// 		mui.toast("注销 " + auth.description + " 成功");
-// 	}, function(e) {
-// 		mui.alert("注销" + auth.description + " 失败：" + e.message);
-// 	});
-// }
 
 //本地登录完成
 function loginFinish(auth) {

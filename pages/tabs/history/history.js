@@ -16,21 +16,25 @@ mui.plusReady(function() {
 	})(mui);
 });
 
+function getListHtml(data) {
+	var html = '<ul class="mui-table-view">';
+	for (var i = 0; i < data.length; i++) {
+		var each = data[i];
+		html +=
+			'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
+			each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
+			'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
+	}
+	html += '</ul>';
+	return html;
+}
+
 function loadItem1() {
 	mui.post(baseurl + '/sign?method=find', {
 		who: "all",
 		valid: "all"
 	}, function(data) {
-		var html = '<ul class="mui-table-view">';
-		for (var i = 0; i < data.length; i++) {
-			var each = data[i];
-			html +=
-				'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
-				each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
-				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
-		}
-		html += '</ul>';
-		document.getElementById("scroll1").innerHTML = html;
+		document.getElementById("scroll1").innerHTML = getListHtml(data);
 	}, 'json');
 }
 
@@ -39,16 +43,7 @@ function loadItem2() {
 		who: "my",
 		valid: "all"
 	}, function(data) {
-		var html = '<ul class="mui-table-view">';
-		for (var i = 0; i < data.length; i++) {
-			var each = data[i];
-			html +=
-				'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
-				each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
-				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
-		}
-		html += '</ul>';
-		document.getElementById("scroll2").innerHTML = html;
+		document.getElementById("scroll2").innerHTML = getListHtml(data);
 	}, 'json');
 }
 
@@ -57,14 +52,6 @@ function loadItem3() {
 		who: "other",
 		valid: "all"
 	}, function(data) {
-		var html = "";
-		for (var i = 0; i < data.length; i++) {
-			var each = data[i];
-			html +=
-				'<ul class="mui-table-view"><li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
-				each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
-				'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li></ul>';
-		}
-		document.getElementById("scroll3").innerHTML = html;
+		document.getElementById("scroll3").innerHTML = getListHtml(data);
 	}, 'json');
 }

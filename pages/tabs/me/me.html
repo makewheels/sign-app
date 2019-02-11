@@ -10,8 +10,40 @@
 			mui.init();
 		</script>
 		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="me.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.mui-table-view {
+				margin-top: 20px;
+			}
+		</style>
 	</head>
 	<body>
-		me.html
+		<div class="mui-page-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell mui-media">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left head-img" id="avatar">
+								<div class="mui-media-body">
+									<span id="nickname"></span>
+									<p id="registTime" class='mui-ellipsis'></p>
+								</div>
+							</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a id="version"></a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" style="text-align: center;">
+							<a href="javascript:logout()">退出登录</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

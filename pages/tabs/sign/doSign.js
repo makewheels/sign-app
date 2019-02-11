@@ -79,6 +79,7 @@ mui.plusReady(function() {
 				clearInterval(interval);
 				isRecording = false;
 				//上传
+				span.style.color = "red";
 				span.innerText = "正在上传...";
 				var uploader = plus.uploader.createUpload(baseurl + '/upload?type=sign&content=record', {},
 					function(upload, status) {
@@ -124,8 +125,8 @@ function checkFinish() {
 				document.getElementById("div_signSuccess").style.display = "inline-block";
 				plus.device.vibrate(180);
 				plus.audio.createPlayer('/audio/bubble.mp3').play(function() {
-					plus.webview.getWebviewById('sign').reload();
 					mui.toast("签到成功！");
+					plus.webview.getWebviewById('sign').reload();
 					plus.webview.currentWebview().close();
 				});
 			}
