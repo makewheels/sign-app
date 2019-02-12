@@ -60,7 +60,6 @@ function loadItem3() {
 
 //打开签到详情页
 function openSignDetailPage(signLogUuid) {
-	console.log(signLogUuid);
 	mui.openWindow({
 		url: 'signDetail.html',
 		extras: {

@@ -17,6 +17,42 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">签到详情</h1>
 		</header>
-		-ms-repeating-linear-gradient
+		<div class="mui-content">
+			<ul class="mui-table-view" style="margin-top: 0;">
+				<li class="mui-table-view-cell mui-media">
+					<img id="avatar" class="mui-media-object mui-pull-left" />
+					<div class="mui-media-body">
+						<b><span id="nickname">稍等...</span></b>
+						<p id="missionName" class='mui-ellipsis'></p>
+					</div>
+				</li>
+			</ul>
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label><b>有效性</b></label>
+					<label id="inTimeRange" style="width:66px;"></label>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 140px;"><b>规定时间范围</b></label>
+					<label id="timeRange"></label>
+				</div>
+				<div class="mui-input-row">
+					<label><b>签到时间</b></label>
+					<label id="signTime" style="width:200px;"></label>
+				</div>
+				<div class="mui-input-row" style="height: 82px;">
+					<label><b>签到地点</b></label>
+					<textarea id="signPosition" style="height: 82px;" disabled="disabled"></textarea>
+				</div>
+				<div style="height: 60px;padding-top: 10px;" class="mui-input-row">
+					<label style="width: 100px;"><b>录音</b></label>
+					<span id="span_record" style="margin-left: 25px; line-height: 36px;">正在下载...</span>
+					<button style="margin-right: 35px;width: 85px;" id='btn_play' type="button" class="mui-btn mui-btn-blue mui-btn-outlined">播放</button>
+				</div>
+			</form>
+			<div align="center">
+				<img id="image" width="300px"/>
+			</div>
+		</div>
 	</body>
 </html>
