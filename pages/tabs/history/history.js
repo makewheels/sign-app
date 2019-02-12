@@ -21,8 +21,10 @@ function getListHtml(data) {
 	for (var i = 0; i < data.length; i++) {
 		var each = data[i];
 		html +=
-			'<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="' +
-			each.avatarUrl + '"><div class="mui-media-body">' + each.nickname +
+			'<li class="mui-table-view-cell mui-media">' +
+			'<a onclick="openSignDetailPage(\'' + each.signLogUuid + '\')">' +
+			'<img class="mui-media-object mui-pull-left" src="' + each.avatarUrl + '">' +
+			'<div class="mui-media-body">' + each.nickname +
 			'<p class="mui-ellipsis">' + each.signTime + '</p></div></a></li>';
 	}
 	html += '</ul>';
@@ -30,7 +32,7 @@ function getListHtml(data) {
 }
 
 function loadItem1() {
-	mui.post(baseurl + '/sign?method=find', {
+	mui.post(baseurl + '/sign?method=getSignList', {
 		who: "all",
 		valid: "all"
 	}, function(data) {
@@ -39,7 +41,7 @@ function loadItem1() {
 }
 
 function loadItem2() {
-	mui.post(baseurl + '/sign?method=find', {
+	mui.post(baseurl + '/sign?method=getSignList', {
 		who: "my",
 		valid: "all"
 	}, function(data) {
@@ -48,10 +50,21 @@ function loadItem2() {
 }
 
 function loadItem3() {
-	mui.post(baseurl + '/sign?method=find', {
+	mui.post(baseurl + '/sign?method=getSignList', {
 		who: "other",
 		valid: "all"
 	}, function(data) {
 		document.getElementById("scroll3").innerHTML = getListHtml(data);
 	}, 'json');
+}
+
+//打开签到详情页
+function openSignDetailPage(signLogUuid) {
+	console.log(signLogUuid);
+	mui.openWindow({
+		url: 'signDetail.html',
+		extras: {
+			signLogUuid: signLogUuid
+		}
+	});
 }
